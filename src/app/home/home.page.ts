@@ -31,13 +31,12 @@ export class HomePage implements OnInit{
               private ngZone: NgZone,
               private router: Router,
               public navCtrl: NavController
-             // private screenOrientation: ScreenOrientation
+              /* private screenOrientation: ScreenOrientation */
              ) {
 
 
   }
 ngOnInit() {
-  // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
 }
   ionViewDidEnter() {
     console.log('ionViewDidEnter');

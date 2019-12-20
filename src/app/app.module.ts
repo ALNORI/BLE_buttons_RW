@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BLE } from '@ionic-native/ble/ngx';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BLE,
     Vibration,
     SplashScreen,
+    ScreenOrientation,
 
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
