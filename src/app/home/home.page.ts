@@ -1,28 +1,27 @@
-import { Component , NgZone, Input, Output, EventEmitter } from '@angular/core';
+import { Component, NgZone, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { BLE } from '@ionic-native/ble/ngx';
 import { NavController, ToastController } from '@ionic/angular';
 import { DetailPage } from '../detail/detail.page';
-import { Router, NavigationExtras} from '@angular/router';
-import {DataService} from '../data.service';
+import { Router, NavigationExtras } from '@angular/router';
+import { DataService } from '../data.service';
 import { ɵConsole } from '@angular/core';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
-const navigationExtras: NavigationExtras = {
-    state: {
-      id: '',
-      name: '',
-      rssi: Number
-    }
-  };
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
   [x: string]: any;
 
 
-
+  public form = [
+    { val: 'Pepperoni', isChecked: true },
+    { val: 'Sausage', isChecked: false },
+    { val: 'Mushroom', isChecked: false }
+  ];
   devices: any[] = [];
   statusMessage: string;
 
@@ -31,9 +30,15 @@ export class HomePage {
               public dataService: DataService,
               private ngZone: NgZone,
               private router: Router,
-              public navCtrl: NavController) {
-  }
+              public navCtrl: NavController
+             // private screenOrientation: ScreenOrientation
+             ) {
 
+
+  }
+ngOnInit() {
+  // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+}
   ionViewDidEnter() {
     console.log('ionViewDidEnter');
     this.scan();
@@ -76,13 +81,13 @@ export class HomePage {
     });
   }
 
- deviceSelected(device) {
+  deviceSelected(device) {
     // console.log(JSON.stringify(device) + ' selected');
     this.dataService.setParamData(device);
     this.router.navigateByUrl('detail/device');
   }
 
-// ************************************************
+  // ************************************************
 
 
 

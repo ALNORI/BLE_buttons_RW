@@ -42,7 +42,7 @@ export class DetailPage implements OnInit {
 
 
     this.device = this.dataService.getParamData();
-    console.log(JSON.stringify(this.device) + ' selected from Detail');
+    console.log(JSON.stringify(this.device) + '  IN Detail');
 
     this.setStatus('Connecting to ' + this.device.name || this.device.id);
 
