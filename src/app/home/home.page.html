@@ -1,105 +1,61 @@
+<ion-header>
+  <!-- -->
+  <ion-toolbar>
+    <ion-title>
+      BLE Button
+    </ion-title>
+    <ion-button color="primary" style="float: right;" (click)="scan()">
+      Scan
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-toolbar>
+  <style type='text/css'>
+    .flex {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: auto;
+      padding: 10px;
+    }
+
+    .flex div {
+      border: 20px;
+      padding: 10px;
+      font-family: verdana;
+      font-size: 2px;
+      text-align: center;
+    }
+  </style>
+  <div class='flex' style=' margin: 20px'>
+    <div style='width: 50px; height: 30px; margin: 10px;' (click)="deviceSelected('lololo','lalalal')"><button
+        mat-raised-button>Basic</button></div>
+    <div style='width: 50px; height: 30px; margin: 10px;'><button mat-raised-button>Basic</button></div>
+    <div style='width: 50px; height: 30px; margin: 10px;'><button mat-raised-button>Basic</button></div>
+    <div style='width: 30px; height: 30px; margin: 10px;'><button mat-raised-button>Basic</button></div>
+  </div>
+  <div>
+
+  </div>
+</ion-toolbar>
+
 <ion-content>
-  <ion-fab-button color="0" style="background-image: url('/assets/Untitled_A0_Rectangle_9_pattern.png'); background-repeat: no-repeat;background-size: cover;"></ion-fab-button>
-  <ion-fab-button color="0" style="background-image: url('/assets/Untitled_A0_Rectangle_9_pattern.png'); background-repeat: no-repeat;background-size: cover;"></ion-fab-button>
-  <ion-fab-button color="0" style="background-image: url('/assets/Untitled_A0_Rectangle_9_pattern.png'); background-repeat: no-repeat;background-size: cover;"></ion-fab-button>
-  <ion-fab-button color="0" style="background-image: url('/assets/Untitled_A0_Rectangle_9_pattern.png'); background-repeat: no-repeat;background-size: cover;"></ion-fab-button>
+  <ion-list>
+
+    <div ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">
+      <h2>{{ device.name || 'Unnamed' }}</h2>
+      <p>{{ device.id }}</p>
+      <p>RSSI: {{ device.rssi }}</p>
+    </div>
+
+  </ion-list>
 </ion-content>
 
-<ion-fab vertical="bottom" horizontal="end">
-  <ion-fab-button color="0" style="background-image: url('/assets/Untitled_A0_Rectangle_9_pattern.png'); background-repeat: no-repeat;background-size: cover;"></ion-fab-button>
 
-  <ion-fab-list side="top">
-    <ion-fab-button>Facebook</ion-fab-button>
-    <ion-fab-button>Twitter</ion-fab-button>
-    <ion-fab-button>Youtube</ion-fab-button>
-  </ion-fab-list>
 
-  <ion-fab-list side="start">
-    <ion-fab-button>Vimeo</ion-fab-button>
-  </ion-fab-list>
-
-</ion-fab>
-
-<!-- <ion-grid>
- 
-  <ion-row>
-    <ion-col>
-      Col 1 Row 1
-    </ion-col>
-    <ion-col>
-      Col 2 Row 1
-    </ion-col>
-    <ion-col>
-      Col 3 Row 1
-    </ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col>
-      Col 1 Row 2
-    </ion-col>
-    <ion-col>
-      Col 2 Row 2
-    </ion-col>
-    <ion-col>
-      Col 3 Row 2
-    </ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col>
-      Col 1 Row 3
-    </ion-col>
-    <ion-col>
-      Col 2 Row 3
-    </ion-col>
-    <ion-col>
-      Col 3 Row 3
-    </ion-col>
-  </ion-row>
-  
-</ion-grid> -->
-
-<!-- <mat-card fxLayout="stretch" 
-      style="background-image: url('/assets/Android Mobile – 1.png');">
-      <div id="Group_1" x="0" y="0">
-        <svg class="Untitled">
-          <pattern elementId="Untitled_A0_Rectangle_9" id="Untitled_A0_Rectangle_9_pattern" x="0" y="0" width="100%"
-            height="100%">
-            <image x="0" y="0" width="100%" height="100%" href="/assets/Untitled_A0_Rectangle_9_pattern.png"
-              xlink:href="Untitled_A0_Rectangle_9_pattern.png"></image>
-          </pattern>
-          <rect id="Untitled" rx="0" ry="0" x="0" y="0" width="43" height="43">
-          </rect>
-        </svg>
-        <svg class="Untitled_A0_Rectangle_10">
-          <pattern elementId="Untitled_A0_Rectangle_11" id="Untitled_A0_Rectangle_11_pattern" x="0" y="0" width="100%"
-            height="100%">
-            <image x="0" y="0" width="100%" height="100%" href="/assets/Untitled_A0_Rectangle_11_pattern.png"
-              xlink:href="Untitled_A0_Rectangle_11_pattern.png"></image>
-          </pattern>
-          <rect id="Untitled_A0_Rectangle_10" rx="0" ry="0" x="0" y="0" width="43" height="43">
-          </rect>
-        </svg>
-        <svg class="Untitled_A0_Rectangle_12">
-          <pattern elementId="Untitled_A0_Rectangle_13" id="Untitled_A0_Rectangle_13_pattern" x="0" y="0" width="100%"
-            height="100%">
-            <image x="0" y="0" width="100%" height="100%" href="/assets/Untitled_A0_Rectangle_13_pattern.png"
-              xlink:href="Untitled_A0_Rectangle_13_pattern.png"></image>
-          </pattern>
-          <rect id="Untitled_A0_Rectangle_12" rx="0" ry="0" x="0" y="0" width="43" height="43">
-          </rect>
-        </svg>
-        <svg class="Untitled_A0_Rectangle_14">
-          <pattern elementId="Untitled_A0_Rectangle_15" id="Untitled_A0_Rectangle_15_pattern" x="0" y="0" width="100%"
-            height="100%">
-            <image x="0" y="0" width="100%" height="100%" href="/assets/Untitled_A0_Rectangle_15_pattern.png"
-              xlink:href="Untitled_A0_Rectangle_15_pattern.png"></image>
-          </pattern>
-          <rect id="Untitled_A0_Rectangle_14" rx="0" ry="0" x="0" y="0" width="43" height="43">
-          </rect>
-        </svg>
-      </div>
-        </mat-card>
-  </div>
- -->
+<ion-footer>
+  <ion-toolbar>
+    <p>{{ statusMessage }}</p>
+  </ion-toolbar>
+</ion-footer>

@@ -5,7 +5,7 @@ import { DetailPage } from '../detail/detail.page';
 import { Router, NavigationExtras } from '@angular/router';
 import { DataService } from '../data.service';
 import { ɵConsole } from '@angular/core';
-import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+// import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
   [x: string]: any;
 
 

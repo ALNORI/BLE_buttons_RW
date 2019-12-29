@@ -13,6 +13,20 @@ const UART_SERVICE = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 const UART_TX_CHARACTERISTIC = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
 const UART_RX_CHARACTERISTIC = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
 
+// *************Microbit */
+const MICROBIT_SERVICE =  'e95d93af-251d-470a-a062-fa1922dfa9a8';
+const EVENT_CHARACTERISTIC = 'e95d5404-251d-470a-a062-fa1922dfa9a8';
+const MES_DPAD_CONTROLLER_ID = 1104;
+
+const MES_DPAD_BUTTON_1_DOWN = 9; // forward
+const MES_DPAD_BUTTON_1_UP = 10; // stop
+const MES_DPAD_BUTTON_2_DOWN = 11; // backward
+const MES_DPAD_BUTTON_3_DOWN = 13; // left
+const MES_DPAD_BUTTON_4_DOWN = 15; // right
+// *************Microbit */
+
+
+
 
 const LIGHTBULB_SERVICE = 'ff10';
 const SWITCH_CHARACTERISTIC = 'ff11';
@@ -24,11 +38,12 @@ const DIMMER_CHARACTERISTIC = 'ff12';
   styleUrls: ['./detail.page.scss'],
 })
 export class DetailPage implements OnInit {
-
+// DEL 2
   device;
   device2: any;
   peripheral: any = {};
   power: boolean;
+  power2: boolean;
   brightness: number;
   statusMessage: string;
 
@@ -68,7 +83,7 @@ export class DetailPage implements OnInit {
     this.setStatus('Connected to ' + (peripheral.name || peripheral.id));
 
     // Update the UI with the current state of the switch characteristic
-    this.ble.read(this.peripheral.id, LED_SERVICE, LED_CHARACERISTIC).then(
+    this.ble.read(this.peripheral.id, MICROBIT_SERVICE, EVENT_CHARACTERISTIC).then(
       buffer => {
         const data = new Uint8Array(buffer);
         console.log('switch characteristic ' + data[0]);
@@ -88,29 +103,48 @@ export class DetailPage implements OnInit {
     // *********************************** */
     data[0] = this.power ? 0 : 1;
 
-    this.ble.write(this.peripheral.id, LED_SERVICE, LED_CHARACERISTIC, data.buffer);
-    console.log('Sending: ' + data[0]);
+    this.ble.write(this.peripheral.id, MICROBIT_SERVICE, EVENT_CHARACTERISTIC, data.buffer[0]);
+    console.log('Sending: ' + data.buffer[0]);
 
   }
-  onPowerSwitchChangeII(state: number) {
+
+  onPowerSwitchChange2(event) {
+    console.log('onPowerSwitchChange2');
+    // *********************************** */
+  }
+
+  onPowerSwitchChangeII(state: any) {
     console.log('onPowerSwitchChange');
     // *********************************** */
     const data = new Uint8Array(1);
-
     // *********************************** */
     data[0] = state;
     console.log('this.data[0]: ' + data[0]);
-
-    this.ble.write(this.peripheral.id, LED_SERVICE, LED_CHARACERISTIC, data.buffer);
-    console.log('Sending: ' + data[0]);
-
+    this.ble.write(this.peripheral.id, MICROBIT_SERVICE, EVENT_CHARACTERISTIC, state[0]);
+    console.log('Sending: ' + state[0]);
+    console.log('Sending: ' + state);
+  
   }
+
+  onPowerSwitchChangeIII(state: any) {
+ 
+    const data = new Uint8Array([0x50, 0x04, 0x0 + state, 0x00]);
+    this.ble.write(this.peripheral.id, MICROBIT_SERVICE, EVENT_CHARACTERISTIC, data.buffer);
+    console.log('Sending data.buffer[0]: ' +  data.buffer.byteLength);
+  }
+ stop() {
+ 
+    const data = new Uint8Array([0x50, 0x04, 0x02, 0x00]);
+    this.ble.write(this.peripheral.id, MICROBIT_SERVICE, EVENT_CHARACTERISTIC, data.buffer);
+    console.log('XXXX-touchend-XXXX');
+  }
+
 
   setBrightness(event) {
     console.log('this.brightness: ' + this.brightness);
     const data = new Uint8Array([this.brightness]);
     console.log('Sending: ' + data[0]);
-    this.ble.write(this.peripheral.id, LED_SERVICE, LED_CHARACERISTIC, data.buffer).then(
+    this.ble.write(this.peripheral.id, MICROBIT_SERVICE, EVENT_CHARACTERISTIC, data.buffer).then(
       () => this.setStatus('Set brightness to ' + this.brightness),
       e => this.showAlert('Unexpected Error', 'Error updating dimmer characteristic ' + e)
     );
