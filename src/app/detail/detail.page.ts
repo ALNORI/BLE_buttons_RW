@@ -18,11 +18,11 @@ const MICROBIT_SERVICE =  'e95d93af-251d-470a-a062-fa1922dfa9a8';
 const EVENT_CHARACTERISTIC = 'e95d5404-251d-470a-a062-fa1922dfa9a8';
 const MES_DPAD_CONTROLLER_ID = 1104;
 
-const MES_DPAD_BUTTON_1_DOWN = 9; // forward
-const MES_DPAD_BUTTON_1_UP = 10; // stop
-const MES_DPAD_BUTTON_2_DOWN = 11; // backward
-const MES_DPAD_BUTTON_3_DOWN = 13; // left
-const MES_DPAD_BUTTON_4_DOWN = 15; // right
+const MES_DPAD_BUTTON_1_DOWN = 1; // forward
+const MES_DPAD_BUTTON_1_UP = 2 // stop
+const MES_DPAD_BUTTON_2_DOWN = 3; // backward
+const MES_DPAD_BUTTON_3_DOWN = 5; // left
+const MES_DPAD_BUTTON_4_DOWN = 7; // right
 // *************Microbit */
 
 
@@ -123,17 +123,17 @@ export class DetailPage implements OnInit {
     this.ble.write(this.peripheral.id, MICROBIT_SERVICE, EVENT_CHARACTERISTIC, state[0]);
     console.log('Sending: ' + state[0]);
     console.log('Sending: ' + state);
-  
+
   }
 
   onPowerSwitchChangeIII(state: any) {
- 
+
     const data = new Uint8Array([0x50, 0x04, 0x0 + state, 0x00]);
     this.ble.write(this.peripheral.id, MICROBIT_SERVICE, EVENT_CHARACTERISTIC, data.buffer);
     console.log('Sending data.buffer[0]: ' +  data.buffer.byteLength);
   }
  stop() {
- 
+
     const data = new Uint8Array([0x50, 0x04, 0x02, 0x00]);
     this.ble.write(this.peripheral.id, MICROBIT_SERVICE, EVENT_CHARACTERISTIC, data.buffer);
     console.log('XXXX-touchend-XXXX');
